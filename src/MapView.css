@@ -1,0 +1,24 @@
+/* MapView.css */
+
+.map-view-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .map-title {
+    font-size: 24px;
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .map-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px #e5e7eb;
+  }
+  
