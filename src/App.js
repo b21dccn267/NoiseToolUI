@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom';
 import MapView from './MapView';
 import DataView from './DataView';
-import AboutPage from './AboutPage'; // Assuming you have this from Plan A
+import AboutPage from './AboutPage';
 import 'leaflet/dist/leaflet.css';
 import './App.css';
 
@@ -12,16 +12,14 @@ const getNavLinkClass = ({ isActive }) => {
 
 const AppWrapper = () => {
   const [data, setData] = useState([]);
-  // Theme state
   const [theme, setTheme] = useState(() => {
     const localTheme = window.localStorage.getItem('theme');
     if (localTheme) {
       return localTheme;
     }
-    // If no preference, check OS preference
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark';
   });
 
   useEffect(() => {
@@ -59,20 +57,20 @@ const AppWrapper = () => {
             <NavLink to="/about" className={getNavLinkClass}>About</NavLink>
           </nav>
         </div>
-        <div className="top-bar-right-content"> {/* Wrapper for right-aligned items */}
+        {/* <div className="top-bar-right-content"> 
           <button onClick={toggleTheme} className="theme-toggle-button">
             {theme === 'light' ? '🌙 Dark' : '☀️ Light'} Mode
           </button>
-        </div>
+        </div> */}
       </header>
 
       <main className="content-area">
         <Routes>
           <Route path="/data" element={<DataView data={data} />} />
           <Route path="/map" element={<MapView data={data} />} />
-          <Route path="/about" element={<AboutPage />} /> {/* Ensure AboutPage exists */}
+          <Route path="/about" element={<AboutPage />} /> 
           <Route path="/" element={
-            <div style={{ textAlign: 'center', paddingTop: '50px' }}> {/* Text color will be inherited */}
+            <div style={{ textAlign: 'center', paddingTop: '50px' }}> 
               <h2>Welcome!</h2>
               <p>Select a view from the navigation bar.</p>
             </div>
