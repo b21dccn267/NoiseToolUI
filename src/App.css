@@ -60,9 +60,9 @@
 
 .nav-link:hover {
   /* background-color: #333;  <-- Remove or make transparent */
-  /* background-color: transparent; */
+  background-color: transparent;
   /* color: white; */
-  background-color: var(--nav-link-hover-bg);
+  /* background-color: var(--nav-link-hover-bg); */
   color: var(--nav-link-active-color);
 }
 

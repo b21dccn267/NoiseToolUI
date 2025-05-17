@@ -50,7 +50,7 @@ const AppWrapper = () => {
     <div className="app-container">
       <header className="top-bar">
         <div className="top-bar-left-content">
-          <div className="top-bar-title">asdf1234</div>
+          <div className="top-bar-title">Noise Map</div>
           <nav className="top-bar-nav">
             <NavLink to="/map" className={getNavLinkClass}>MapView</NavLink>
             <NavLink to="/data" className={getNavLinkClass}>DataView</NavLink>

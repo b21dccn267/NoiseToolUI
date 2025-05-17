@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AboutPage = () => {
-  const projectVersion = process.env.REACT_APP_VERSION || 'N/A';
+  const projectVersion = process.env.REACT_APP_VERSION || '0.1';
 
   return (
     <div style={{ padding: '20px', color: 'var(--navbar-text)', textAlign: 'center' }}>
