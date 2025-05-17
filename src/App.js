@@ -1,24 +1,31 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, NavLink, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink, useLocation } from 'react-router-dom';
 import MapView from './MapView';
 import DataView from './DataView';
-import AboutPage from './AboutPage'; // Import AboutPage
+import AboutPage from './AboutPage'; // Assuming you have this from Plan A
 import 'leaflet/dist/leaflet.css';
-import './App.css'; // We'll heavily modify this
+import './App.css';
 
-// Helper for active link styling (optional, but good practice)
 const getNavLinkClass = ({ isActive }) => {
   return isActive ? "nav-link active" : "nav-link";
 };
 
 const AppWrapper = () => {
-  const location = useLocation();
-  // No need for isDataOrMap specific background here, as the top bar is global
-  // and individual views manage their own backgrounds.
-
   const [data, setData] = useState([]);
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    const localTheme = window.localStorage.getItem('theme');
+    if (localTheme) {
+      return localTheme;
+    }
+    // If no preference, check OS preference
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  });
+
   useEffect(() => {
+    // Fetch data (existing logic)
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:8080/api/noise/list');
@@ -31,8 +38,18 @@ const AppWrapper = () => {
     fetchData();
   }, []);
 
+  // Effect for theme changes
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme); // Set attribute on <html>
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <div className="app-container"> {/* Main container */}
+    <div className="app-container">
       <header className="top-bar">
         <div className="top-bar-left-content">
           <div className="top-bar-title">asdf1234</div>
@@ -42,15 +59,20 @@ const AppWrapper = () => {
             <NavLink to="/about" className={getNavLinkClass}>About</NavLink>
           </nav>
         </div>
+        <div className="top-bar-right-content"> {/* Wrapper for right-aligned items */}
+          <button onClick={toggleTheme} className="theme-toggle-button">
+            {theme === 'light' ? '🌙 Dark' : '☀️ Light'} Mode
+          </button>
+        </div>
       </header>
 
       <main className="content-area">
         <Routes>
           <Route path="/data" element={<DataView data={data} />} />
           <Route path="/map" element={<MapView data={data} />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<AboutPage />} /> {/* Ensure AboutPage exists */}
           <Route path="/" element={
-            <div style={{ textAlign: 'center', color: 'white', paddingTop: '50px' }}>
+            <div style={{ textAlign: 'center', paddingTop: '50px' }}> {/* Text color will be inherited */}
               <h2>Welcome!</h2>
               <p>Select a view from the navigation bar.</p>
             </div>
