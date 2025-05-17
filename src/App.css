@@ -1,62 +1,88 @@
-/* App.css */
-
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
 }
 
 .app-container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.app-header {
-  background-color: #1e3a8a;
-  padding: 20px;
+.top-bar {
+  background-color: #222;
   color: white;
+  padding: 0 20px; /* Padding on the sides of the bar itself */
+  display: flex;
+  /* justify-content: space-between;  <-- REMOVE THIS or change to flex-start */
+  justify-content: flex-start; /* Align content to the start (left) */
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
-.navbar {
-  margin-top: 10px;
+/* New wrapper for title and nav */
+.top-bar-left-content {
+  display: flex;
+  align-items: center; /* Vertically align title and nav items */
+}
+
+.top-bar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: 30px; /* Add some space between title and nav items */
+}
+
+.top-bar-nav {
+  display: flex;
+  gap: 15px; /* Space between nav items (can be adjusted) */
 }
 
 .nav-link {
-  margin: 0 15px;
+  color: #bbb;
   text-decoration: none;
-  color: #dbeafe;
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.2s;
+  padding: 8px 12px; /* Slightly smaller padding for a more compact look if desired */
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 0.9em; /* Optional: slightly smaller font for nav links */
 }
 
-.nav-link:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
-.content {
-  padding: 20px;
-}
-
-.welcome-text {
-  margin-top: 40px;
-  font-size: 24px;
-  color: #333;
-}
-/* App.css */
-
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.gradient-background {
-  animation: gradientAnimation 15s ease infinite;
-  background: linear-gradient(-45deg, #5e4e4f, #7c3421, #6e2511, #57334c);
-  background-size: 400% 400%;
-  min-height: 100vh;
-  padding: 40px;
+/* .nav-link:hover {
+  background-color: #333;
   color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
+/* 
+.nav-link.active {
+  color: white;
+  font-weight: bold;
+  background-color: #4a4a4a;
+} */
+.nav-link:hover {
+  /* background-color: #333;  <-- Remove or make transparent */
+  background-color: transparent;
+  color: white; /* Or a slightly different color for hover, e.g., #ddd */
+}
+.nav-link.active {
+  color: white;       /* Active link text color (e.g., brighter white) */
+  font-weight: bold;  /* Keeps the text bold */
+  background-color: transparent; /* Explicitly set background to transparent */
+  /* Or simply remove the background-color line altogether */
+}
+
+.content-area {
+  padding-top: 60px; /* Height of the top-bar */
+  flex-grow: 1;
 }
